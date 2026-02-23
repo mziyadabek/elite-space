@@ -63,17 +63,6 @@ Serve the `dist/` folder with any static host and keep the server running.
 
 ---
 
-## Admin Login
-
-URL: `http://localhost:3000/admin`
-
-| Field | Value |
-|-------|-------|
-| Username | `admin` |
-| Password | `elite2025` |
-
-To change the password, edit `src/pages/AdminPage.jsx`:
-
 ```js
 const ADMIN_USER = 'admin'
 const ADMIN_PASS = 'elite2025' // ← change this
