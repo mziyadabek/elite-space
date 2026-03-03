@@ -125,9 +125,7 @@ function LoginScreen({ user, pass, err, setUser, setPass, login }) {
         </div>
         {err && <div style={styles.loginErr}>{err}</div>}
         <button style={styles.loginBtn} onClick={login}>Войти →</button>
-        <div style={{ marginTop: 20, fontSize: 11, color: 'var(--muted)', textAlign: 'center' }}>
-          admin / elite2025
-        </div>
+        
       </div>
     </div>
   )
