@@ -92,7 +92,7 @@ export default function ProductsAdmin({ store }) {
           <div></div>
           <div>Товар</div>
           <div>Бренд</div>
-          <div>Варианты / Цены</div>
+          <div>Модели / Цены</div>
           <div>Статус</div>
           <div>Действия</div>
         </div>
@@ -263,8 +263,8 @@ function ProductModal({ product, brands, onSave, onClose, saving, uploadImage })
             <datalist id="brands-dl">{brands.map(b => <option key={b} value={b} />)}</datalist>
           </div>
           <div style={styles.field}>
-            <label style={styles.fieldLabel}>Название *</label>
-            <input style={styles.fieldInput} value={name} onChange={e => setName(e.target.value)} placeholder="iPhone 17 Pro" />
+            <label style={styles.fieldLabel}>Название (линейка) *</label>
+            <input style={styles.fieldInput} value={name} onChange={e => setName(e.target.value)} placeholder="iPhone" />
           </div>
 
           {/* IMAGE UPLOAD */}
@@ -293,12 +293,12 @@ function ProductModal({ product, brands, onSave, onClose, saving, uploadImage })
           </div>
 
           <div style={styles.field}>
-            <label style={styles.fieldLabel}>Эмодзи (запасное)</label>
-            <input style={styles.fieldInput} value={emoji} onChange={e => setEmoji(e.target.value)} placeholder="📱" maxLength={4} />
+            <label style={styles.fieldLabel}>Описание / подзаголовок</label>
+            <input style={styles.fieldInput} value={tag} onChange={e => setTag(e.target.value)} placeholder="Смартфоны" />
           </div>
           <div style={styles.field}>
-            <label style={styles.fieldLabel}>Ярлык</label>
-            <input style={styles.fieldInput} value={tag} onChange={e => setTag(e.target.value)} placeholder="В наличии" />
+            <label style={styles.fieldLabel}>Эмодзи (запасное)</label>
+            <input style={styles.fieldInput} value={emoji} onChange={e => setEmoji(e.target.value)} placeholder="📱" maxLength={4} />
           </div>
           <div style={{ ...styles.field, gridColumn: 'span 2' }}>
             <label style={styles.fieldLabel}>Статус</label>
@@ -311,17 +311,17 @@ function ProductModal({ product, brands, onSave, onClose, saving, uploadImage })
 
         {/* VARIANTS */}
         <div style={{ marginTop: 24 }}>
-          <div style={styles.fieldLabel}>Варианты и цены *</div>
+          <div style={styles.fieldLabel}>Модели и цены *</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 10 }}>
             {variants.map((v, i) => (
               <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 36px', gap: 8, alignItems: 'start' }}>
-                <input style={styles.fieldInput} placeholder="128 GB Wi-Fi" value={v.model} onChange={e => updateVariant(i, 'model', e.target.value)} />
+                <input style={styles.fieldInput} placeholder="iPhone 16 Pro 128GB" value={v.model} onChange={e => updateVariant(i, 'model', e.target.value)} />
                 <input style={styles.fieldInput} placeholder="199 900" value={v.price} onChange={e => updateVariant(i, 'price', e.target.value)} />
                 <button style={styles.removeBtn} onClick={() => removeVariant(i)} title="Удалить вариант">×</button>
               </div>
             ))}
           </div>
-          <button style={styles.addVariantBtn} onClick={addVariant}>+ Добавить вариант</button>
+          <button style={styles.addVariantBtn} onClick={addVariant}>+ Добавить модель</button>
         </div>
 
         <div style={styles.modalFooter}>

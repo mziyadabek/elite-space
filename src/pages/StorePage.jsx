@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 
 export default function StorePage({ store }) {
   const { products, settings, loading } = store
@@ -86,8 +86,9 @@ export default function StorePage({ store }) {
             {/* Logo */}
             <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
               <img src="/uploads/logo.png" alt="élite space" style={{
-                height: isMobile ? 44 : (scrolled ? 48 : 56),
+                height: isMobile ? 64 : (scrolled ? 68 : 80),
                 width: 'auto',
+                maxWidth: isMobile ? 160 : 220,
                 objectFit: 'contain',
                 filter: 'brightness(0) invert(1)',
                 transition: 'height 0.35s ease',
@@ -220,12 +221,20 @@ export default function StorePage({ store }) {
             <button style={styles.btnPrimary} onClick={() => document.getElementById('products').scrollIntoView({ behavior: 'smooth' })}>
               Смотреть каталог
             </button>
-            <button style={styles.waPillBtn} onClick={() => window.open(waUrl, '_blank')}>
-              <img src="/uploads/wp.png" alt="WhatsApp" width="16" height="16" />
+            <button style={styles.waPillBtn}
+              onClick={() => window.open(waUrl, '_blank')}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.22)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.7)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.12)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.45)' }}
+            >
+              <img src="/uploads/wp.png" alt="WhatsApp" width="15" height="15" style={{ opacity: 0.8 }} />
               WhatsApp
             </button>
-            <button style={styles.igPillBtn} onClick={() => window.open(igUrl, '_blank')}>
-              <img src="/uploads/instagram.png" alt="Instagram" width="16" height="16" />
+            <button style={styles.igPillBtn}
+              onClick={() => window.open(igUrl, '_blank')}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.22)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.7)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.12)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.45)' }}
+            >
+              <img src="/uploads/instagram.png" alt="Instagram" width="15" height="15" style={{ opacity: 0.8 }} />
               Instagram
             </button>
           </div>
@@ -269,6 +278,8 @@ export default function StorePage({ store }) {
           <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--muted)' }}>
             <div style={styles.spinner} />
           </div>
+        ) : isMobile ? (
+          <ProductCarousel products={availableProducts} onCardClick={() => setContactOpen(true)} observe={observe} />
         ) : (
           <div style={styles.productsGrid}>
             {availableProducts.map((p, i) => (
@@ -321,7 +332,7 @@ export default function StorePage({ store }) {
       {/* FOOTER */}
       <footer className="footer-bar" style={styles.footer}>
         <a href="/" style={{ textDecoration: 'none' }}>
-          <img src="/uploads/logo.png" alt="élite space" style={{ width: 100, objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+          <img src="/uploads/logo.png" alt="élite space" style={{ height: 56, width: 'auto', maxWidth: 180, objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
         </a>
         <ul className="footer-links" style={{ display: 'flex', gap: 28, listStyle: 'none' }}>
           {[['#products', 'Каталог'], ['#howto', 'Доставка'], [igUrl, 'Instagram']].map(([href, label]) => (
@@ -360,8 +371,88 @@ export default function StorePage({ store }) {
   )
 }
 
+const VISIBLE_ROWS = 4
+
+function ProductCarousel({ products, onCardClick, observe }) {
+  const trackRef = useRef()
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const onScroll = useCallback(() => {
+    const el = trackRef.current
+    if (!el) return
+    const cardWidth = el.firstChild?.offsetWidth || el.offsetWidth * 0.82
+    const gap = 12
+    const idx = Math.round(el.scrollLeft / (cardWidth + gap))
+    setActiveIndex(Math.min(idx, products.length - 1))
+  }, [products.length])
+
+  const scrollTo = (idx) => {
+    const el = trackRef.current
+    if (!el) return
+    const cardWidth = el.firstChild?.offsetWidth || el.offsetWidth * 0.82
+    const gap = 12
+    el.scrollTo({ left: idx * (cardWidth + gap), behavior: 'smooth' })
+  }
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <div
+        ref={trackRef}
+        onScroll={onScroll}
+        style={{
+          display: 'flex',
+          gap: 12,
+          overflowX: 'auto',
+          scrollSnapType: 'x mandatory',
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          paddingBottom: 4,
+          marginLeft: -20,
+          marginRight: -20,
+          paddingLeft: 20,
+          paddingRight: 20,
+        }}
+      >
+        {products.map((p, i) => (
+          <div key={p.id} style={{
+            flex: '0 0 82vw',
+            maxWidth: 340,
+            scrollSnapAlign: 'start',
+          }}>
+            <ProductCard product={p} index={i} onClick={onCardClick} observe={observe} />
+          </div>
+        ))}
+      </div>
+
+      {/* Dot indicators */}
+      {products.length > 1 && (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginTop: 20 }}>
+          {products.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => scrollTo(i)}
+              style={{
+                width: i === activeIndex ? 20 : 6,
+                height: 6,
+                borderRadius: 100,
+                background: i === activeIndex ? 'var(--peach)' : 'rgba(232,149,109,0.25)',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'width 0.3s ease, background 0.3s ease',
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function ProductCard({ product: p, index, onClick, observe }) {
   const [hovered, setHovered] = useState(false)
+  const [expanded, setExpanded] = useState(false)
   const ref = useRef()
 
   useEffect(() => {
@@ -372,6 +463,8 @@ function ProductCard({ product: p, index, onClick, observe }) {
   }, [])
 
   const imgSrc = p.imgUrl && (p.imgUrl.startsWith('/') || p.imgUrl.startsWith('http')) ? p.imgUrl : null
+  const hasMore = p.variants.length > VISIBLE_ROWS
+  const shown = expanded ? p.variants : p.variants.slice(0, VISIBLE_ROWS)
 
   return (
     <div
@@ -382,11 +475,10 @@ function ProductCard({ product: p, index, onClick, observe }) {
         boxShadow: hovered ? '0 20px 56px rgba(200,140,100,0.18)' : '0 2px 12px rgba(200,140,100,0.06)',
         animationDelay: `${index * 0.07}s`
       }}
-      onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div style={styles.cardImg}>
+      <div style={styles.cardImg} onClick={onClick}>
         {imgSrc ? (
           <img src={imgSrc} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }} />
@@ -398,18 +490,31 @@ function ProductCard({ product: p, index, onClick, observe }) {
       </div>
       <div style={{ padding: 24, flex: 1, display: 'flex', flexDirection: 'column' }}>
         <div style={styles.cardBrand}>{p.brand}</div>
-        <div style={styles.cardName}>{p.name}</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {p.variants.map((v, i) => (
-            <div key={i} style={styles.priceRow}>
+        <div style={styles.cardName} onClick={onClick}>{p.name}</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          {shown.map((v, i) => (
+            <div key={i} style={styles.priceRow} onClick={onClick}>
               <span style={styles.priceModel}>{v.model}</span>
               <span style={styles.priceAmount}>{v.price} <span style={{ fontSize: 11, color: 'var(--muted)' }}>тг</span></span>
             </div>
           ))}
         </div>
+        {hasMore && (
+          <button
+            style={styles.expandBtn}
+            onClick={e => { e.stopPropagation(); setExpanded(x => !x) }}
+          >
+            {expanded
+              ? '↑ Свернуть'
+              : `↓ Ещё ${p.variants.length - VISIBLE_ROWS} моделей`}
+          </button>
+        )}
         <div style={styles.cardFooter}>
           <span style={styles.cardTag}>{p.tag}</span>
-          <span style={{ fontSize: 11, color: 'var(--peach)', fontWeight: 600, letterSpacing: 0.5 }}>Заказать →</span>
+          <span
+            style={{ fontSize: 11, color: 'var(--peach)', fontWeight: 600, letterSpacing: 0.5, cursor: 'pointer' }}
+            onClick={onClick}
+          >Заказать →</span>
         </div>
       </div>
     </div>
@@ -445,22 +550,28 @@ const styles = {
     whiteSpace: 'nowrap',
   },
   waPillBtn: {
-    background: 'linear-gradient(135deg, #25D366, #128C7E)',
-    color: 'white', border: 'none', padding: '12px 22px',
-    fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 600,
+    background: 'rgba(232,149,109,0.12)',
+    color: 'var(--peach-dark)',
+    border: '1px solid rgba(232,149,109,0.45)',
+    padding: '12px 22px',
+    fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 600,
     letterSpacing: '1.5px', textTransform: 'uppercase',
     cursor: 'pointer', borderRadius: '50px',
     display: 'inline-flex', alignItems: 'center', gap: 8,
-    boxShadow: '0 4px 15px rgba(37,211,102,0.35)', transition: 'all 0.3s ease',
+    backdropFilter: 'blur(8px)',
+    transition: 'all 0.25s ease',
   },
   igPillBtn: {
-    background: 'linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)',
-    color: 'white', border: 'none', padding: '12px 22px',
-    fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 600,
+    background: 'rgba(232,149,109,0.12)',
+    color: 'var(--peach-dark)',
+    border: '1px solid rgba(232,149,109,0.45)',
+    padding: '12px 22px',
+    fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 600,
     letterSpacing: '1.5px', textTransform: 'uppercase',
     cursor: 'pointer', borderRadius: '50px',
     display: 'inline-flex', alignItems: 'center', gap: 8,
-    boxShadow: '0 4px 15px rgba(220,39,67,0.35)', transition: 'all 0.3s ease',
+    backdropFilter: 'blur(8px)',
+    transition: 'all 0.25s ease',
   },
   hero: {
     minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr',
@@ -497,6 +608,7 @@ const styles = {
   priceRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '8px 0', borderBottom: '1px solid var(--border)' },
   priceModel: { fontSize: 12, color: 'var(--muted)', fontWeight: 400, flex: 1, paddingRight: 12, fontFamily: 'var(--font-body)' },
   priceAmount: { fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 400, color: 'var(--dark)', whiteSpace: 'nowrap' },
+  expandBtn: { background: 'transparent', border: '1px dashed rgba(232,149,109,0.4)', color: 'var(--peach)', padding: '8px 0', fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 600, letterSpacing: '1.2px', textTransform: 'uppercase', cursor: 'pointer', borderRadius: 4, width: '100%', marginTop: 8, transition: 'background 0.2s, border-color 0.2s' },
   cardFooter: { marginTop: 20, paddingTop: 16, borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
   cardTag: { fontSize: 9, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--muted2)', fontWeight: 500, fontFamily: 'var(--font-body)' },
   btnPrimary: { background: 'var(--peach)', color: 'white', border: 'none', padding: '15px 32px', fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 500, letterSpacing: '1.5px', textTransform: 'uppercase', cursor: 'pointer', borderRadius: '50px' },

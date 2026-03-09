@@ -1,5 +1,139 @@
 {
-  "products": [],
+  "products": [
+    {
+      "id": 1,
+      "brand": "Apple",
+      "name": "iPhone",
+      "emoji": "📱",
+      "imgUrl": "",
+      "tag": "Смартфоны",
+      "available": true,
+      "variants": [
+        { "model": "iPhone 15 128GB", "price": "289 900" },
+        { "model": "iPhone 15 256GB", "price": "319 900" },
+        { "model": "iPhone 15 Pro 128GB", "price": "399 900" },
+        { "model": "iPhone 15 Pro 256GB", "price": "439 900" },
+        { "model": "iPhone 15 Pro Max 256GB", "price": "499 900" },
+        { "model": "iPhone 15 Pro Max 512GB", "price": "569 900" },
+        { "model": "iPhone 16 128GB", "price": "349 900" },
+        { "model": "iPhone 16 256GB", "price": "379 900" },
+        { "model": "iPhone 16 Pro 128GB", "price": "459 900" },
+        { "model": "iPhone 16 Pro 256GB", "price": "509 900" },
+        { "model": "iPhone 16 Pro Max 256GB", "price": "579 900" },
+        { "model": "iPhone 16 Pro Max 512GB", "price": "649 900" }
+      ]
+    },
+    {
+      "id": 2,
+      "brand": "Apple",
+      "name": "MacBook",
+      "emoji": "💻",
+      "imgUrl": "",
+      "tag": "Ноутбуки",
+      "available": true,
+      "variants": [
+        { "model": "MacBook Air 13\" M2 8GB/256GB", "price": "579 900" },
+        { "model": "MacBook Air 13\" M2 8GB/512GB", "price": "699 900" },
+        { "model": "MacBook Air 15\" M3 8GB/256GB", "price": "749 900" },
+        { "model": "MacBook Air 15\" M3 16GB/512GB", "price": "929 900" },
+        { "model": "MacBook Pro 14\" M3 Pro 18GB/512GB", "price": "1 199 900" },
+        { "model": "MacBook Pro 16\" M3 Max 36GB/1TB", "price": "1 799 900" }
+      ]
+    },
+    {
+      "id": 3,
+      "brand": "Apple",
+      "name": "iPad",
+      "emoji": "🖥️",
+      "imgUrl": "",
+      "tag": "Планшеты",
+      "available": true,
+      "variants": [
+        { "model": "iPad 10.9\" 64GB Wi-Fi", "price": "199 900" },
+        { "model": "iPad 10.9\" 256GB Wi-Fi", "price": "269 900" },
+        { "model": "iPad Air 11\" M2 128GB Wi-Fi", "price": "369 900" },
+        { "model": "iPad Air 13\" M2 128GB Wi-Fi", "price": "479 900" },
+        { "model": "iPad Pro 11\" M4 256GB Wi-Fi", "price": "599 900" },
+        { "model": "iPad Pro 13\" M4 256GB Wi-Fi", "price": "799 900" }
+      ]
+    },
+    {
+      "id": 4,
+      "brand": "Apple",
+      "name": "Apple Watch",
+      "emoji": "⌚",
+      "imgUrl": "",
+      "tag": "Смарт-часы",
+      "available": true,
+      "variants": [
+        { "model": "Apple Watch SE 40mm GPS", "price": "129 900" },
+        { "model": "Apple Watch SE 44mm GPS", "price": "149 900" },
+        { "model": "Apple Watch Series 10 42mm GPS", "price": "229 900" },
+        { "model": "Apple Watch Series 10 46mm GPS", "price": "249 900" },
+        { "model": "Apple Watch Ultra 2 49mm GPS+LTE", "price": "499 900" }
+      ]
+    },
+    {
+      "id": 5,
+      "brand": "Apple",
+      "name": "AirPods",
+      "emoji": "🎧",
+      "imgUrl": "",
+      "tag": "Наушники",
+      "available": true,
+      "variants": [
+        { "model": "AirPods 4", "price": "99 900" },
+        { "model": "AirPods 4 ANC", "price": "129 900" },
+        { "model": "AirPods Pro 2", "price": "169 900" },
+        { "model": "AirPods Max USB-C", "price": "379 900" }
+      ]
+    },
+    {
+      "id": 6,
+      "brand": "DJI",
+      "name": "Дроны DJI",
+      "emoji": "🚁",
+      "imgUrl": "",
+      "tag": "Дроны",
+      "available": true,
+      "variants": [
+        { "model": "DJI Mini 4 Pro (DJI RC-N2)", "price": "399 900" },
+        { "model": "DJI Mini 4 Pro Fly More Combo", "price": "549 900" },
+        { "model": "DJI Air 3S (DJI RC-N3)", "price": "699 900" },
+        { "model": "DJI Air 3S Fly More Combo", "price": "899 900" },
+        { "model": "DJI Mavic 3 Pro (DJI RC)", "price": "1 299 900" }
+      ]
+    },
+    {
+      "id": 7,
+      "brand": "Garmin",
+      "name": "Garmin",
+      "emoji": "🏃",
+      "imgUrl": "",
+      "tag": "GPS-часы",
+      "available": true,
+      "variants": [
+        { "model": "Garmin Forerunner 165", "price": "179 900" },
+        { "model": "Garmin Forerunner 265", "price": "269 900" },
+        { "model": "Garmin Forerunner 965", "price": "449 900" },
+        { "model": "Garmin Fenix 8 Solar 47mm", "price": "699 900" },
+        { "model": "Garmin Epix Pro 51mm", "price": "799 900" }
+      ]
+    },
+    {
+      "id": 8,
+      "brand": "WHOOP",
+      "name": "WHOOP",
+      "emoji": "💪",
+      "imgUrl": "",
+      "tag": "Фитнес-трекер",
+      "available": true,
+      "variants": [
+        { "model": "WHOOP 4.0 (12 мес подписка)", "price": "149 900" },
+        { "model": "WHOOP 4.0 (24 мес подписка)", "price": "249 900" }
+      ]
+    }
+  ],
   "settings": {
     "storeName": "élite space",
     "tagline": "Твоя идеальная техника здесь",

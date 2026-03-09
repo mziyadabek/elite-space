@@ -39,6 +39,9 @@ button { cursor: pointer; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes islandExpand { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 
+/* ─── Carousel scrollbar hide ─── */
+.carousel-track::-webkit-scrollbar { display: none; }
+
 /* ─── Mobile responsive ─── */
 @media (max-width: 768px) {
   .hero-section {
@@ -55,7 +58,10 @@ button { cursor: pointer; }
   .howto-section { padding: 60px 20px !important; }
   .howto-grid { grid-template-columns: 1fr !important; }
 
-  .products-section { padding: 60px 20px !important; }
+  .products-section { padding: 60px 0px 60px 20px !important; }
+  .products-section > div,
+  .products-section > p,
+  .products-section > h2 { padding-right: 20px; }
 
   .footer-bar {
     flex-direction: column !important;
