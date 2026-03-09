@@ -217,39 +217,26 @@ export default function StorePage({ store }) {
           <p style={styles.heroDesc}>
             {s.description || 'Apple, Garmin, DJI, Canon, WHOOP и другие топовые бренды. Гарантия до 24 месяцев. Скидка при оплате наличными.'}
           </p>
-          <div style={{
-            display: 'flex',
-            gap: 10,
-            flexDirection: isMobile ? 'column' : 'row',
-            flexWrap: isMobile ? 'nowrap' : 'wrap',
-            marginBottom: 0,
-          }}>
-            <button
-              style={{ ...styles.btnPrimary, width: isMobile ? '100%' : 'auto', padding: isMobile ? '16px 24px' : '15px 32px', fontSize: isMobile ? 13 : 12 }}
-              onClick={() => document.getElementById('products').scrollIntoView({ behavior: 'smooth' })}
-            >
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 0 }}>
+            <button style={styles.btnPrimary} onClick={() => document.getElementById('products').scrollIntoView({ behavior: 'smooth' })}>
               Смотреть каталог
             </button>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <button
-                style={{ ...styles.waPillBtn, flex: isMobile ? 1 : 'none', justifyContent: 'center', padding: isMobile ? '14px 16px' : '12px 22px' }}
-                onClick={() => window.open(waUrl, '_blank')}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.22)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.7)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.12)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.45)' }}
-              >
-                <img src="/uploads/wp.png" alt="WhatsApp" width="15" height="15" style={{ opacity: 0.8 }} />
-                WhatsApp
-              </button>
-              <button
-                style={{ ...styles.igPillBtn, flex: isMobile ? 1 : 'none', justifyContent: 'center', padding: isMobile ? '14px 16px' : '12px 22px' }}
-                onClick={() => window.open(igUrl, '_blank')}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.22)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.7)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.12)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.45)' }}
-              >
-                <img src="/uploads/instagram.png" alt="Instagram" width="15" height="15" style={{ opacity: 0.8 }} />
-                Instagram
-              </button>
-            </div>
+            <button style={styles.waPillBtn}
+              onClick={() => window.open(waUrl, '_blank')}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.22)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.7)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.12)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.45)' }}
+            >
+              <img src="/uploads/wp.png" alt="WhatsApp" width="15" height="15" style={{ opacity: 0.8 }} />
+              WhatsApp
+            </button>
+            <button style={styles.igPillBtn}
+              onClick={() => window.open(igUrl, '_blank')}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.22)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.7)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(232,149,109,0.12)'; e.currentTarget.style.borderColor = 'rgba(232,149,109,0.45)' }}
+            >
+              <img src="/uploads/instagram.png" alt="Instagram" width="15" height="15" style={{ opacity: 0.8 }} />
+              Instagram
+            </button>
           </div>
           <div className="hero-stats" style={styles.heroStats}>
             <div><div style={styles.statNum}>25K+</div><div style={styles.statLabel}>Покупателей</div></div>
@@ -303,7 +290,7 @@ export default function StorePage({ store }) {
       </section>
 
       {/* BENEFITS */}
-      <section className="benefits-section" style={{ padding: isMobile ? '52px 20px' : '100px 52px' }}>
+      <section className="benefits-section" style={{ padding: '100px 52px' }}>
         <div style={styles.eyebrow}>Почему мы</div>
         <h2 style={styles.sectionTitle}>Наши <em style={{ fontStyle: 'italic', color: 'var(--peach)' }}>преимущества</em></h2>
         <div className="benefits-grid" style={styles.benefitsGrid}>
@@ -313,9 +300,9 @@ export default function StorePage({ store }) {
             { icon: '🛡️', title: `Гарантия ${s.guaranteeMonths || 12} мес`, desc: 'Официальная гарантия на каждое устройство. Постгарантийная поддержка.' },
             { icon: '🚀', title: 'Быстрая доставка', desc: `По Алматы — в день заказа. По всему Казахстану — ${s.deliveryDays || '1–3'} рабочих дня.` },
           ].map((b, i) => (
-            <div key={i} style={styles.benefitItem} className="benefit-item-inner">
-              <div style={{ ...styles.benefitIcon, width: isMobile ? 36 : 44, height: isMobile ? 36 : 44, fontSize: isMobile ? 18 : 22, marginBottom: isMobile ? 14 : 22 }}>{b.icon}</div>
-              <div style={{ ...styles.benefitTitle, fontSize: isMobile ? 17 : 22, marginBottom: isMobile ? 8 : 12 }}>{b.title}</div>
+            <div key={i} style={styles.benefitItem}>
+              <div style={styles.benefitIcon}>{b.icon}</div>
+              <div style={styles.benefitTitle}>{b.title}</div>
               <div style={styles.benefitDesc}>{b.desc}</div>
             </div>
           ))}
@@ -323,7 +310,7 @@ export default function StorePage({ store }) {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="howto-section" style={{ ...styles.products, padding: isMobile ? '52px 20px' : '100px 52px' }} id="howto">
+      <section className="howto-section" style={{ ...styles.products, padding: '100px 52px' }} id="howto">
         <div style={styles.eyebrow}>Как сделать заказ</div>
         <h2 style={styles.sectionTitle}>Всё <em style={{ fontStyle: 'italic', color: 'var(--peach)' }}>просто</em></h2>
         <div className="howto-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28, marginTop: 60 }}>
@@ -332,23 +319,11 @@ export default function StorePage({ store }) {
             { n: '02', icon: '💳', title: 'Оплатите удобно', desc: 'Наличными (со скидкой), Kaspi, переводом или рассрочкой. Любой удобный способ.' },
             { n: '03', icon: '📦', title: 'Получите товар', desc: 'Самовывоз в Алматы или доставка по всему Казахстану. Быстро и надёжно.' },
           ].map((step, i) => (
-            <div key={i} style={{ ...styles.howtoCard, padding: isMobile ? '28px 24px' : '40px 32px', display: isMobile ? 'flex' : 'block', alignItems: isMobile ? 'flex-start' : undefined, gap: isMobile ? 16 : undefined }}>
-              {isMobile ? (
-                <>
-                  <div style={{ fontSize: 28, flexShrink: 0, marginTop: 2 }}>{step.icon}</div>
-                  <div>
-                    <div style={{ ...styles.howtoTitle, fontSize: 18, marginBottom: 6 }}>{step.title}</div>
-                    <div style={styles.benefitDesc}>{step.desc}</div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div style={styles.howtoNum}>{step.n}</div>
-                  <div style={{ fontSize: 30, marginBottom: 20 }}>{step.icon}</div>
-                  <div style={styles.howtoTitle}>{step.title}</div>
-                  <div style={styles.benefitDesc}>{step.desc}</div>
-                </>
-              )}
+            <div key={i} style={styles.howtoCard}>
+              <div style={styles.howtoNum}>{step.n}</div>
+              <div style={{ fontSize: 30, marginBottom: 20 }}>{step.icon}</div>
+              <div style={styles.howtoTitle}>{step.title}</div>
+              <div style={styles.benefitDesc}>{step.desc}</div>
             </div>
           ))}
         </div>
@@ -606,8 +581,8 @@ const styles = {
   heroBg: { position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 50% 70% at 80% 50%, rgba(232,149,109,0.12) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 10% 20%, rgba(242,176,138,0.08) 0%, transparent 50%)' },
   heroBadge: { display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(232,149,109,0.12)', border: '1px solid rgba(232,149,109,0.35)', padding: '7px 16px', fontSize: 10, fontWeight: 600, letterSpacing: '2.5px', textTransform: 'uppercase', color: 'var(--peach-dark)', marginBottom: 28, borderRadius: 100, fontFamily: 'var(--font-body)', animation: 'fadeUp 0.8s 0.2s ease both' },
   heroBadgeDot: { width: 5, height: 5, borderRadius: '50%', background: 'var(--peach)', animation: 'pulse 1.8s infinite' },
-  heroTitle: { fontFamily: 'var(--font-display)', fontSize: 'clamp(40px,9vw,96px)', fontWeight: 300, lineHeight: 1.05, marginBottom: 20, animation: 'fadeUp 0.8s 0.35s ease both', color: 'var(--peach)' },
-  heroDesc: { color: 'var(--muted)', fontSize: 'clamp(13px,3.5vw,15px)', lineHeight: 1.7, maxWidth: 380, marginBottom: 28, animation: 'fadeUp 0.8s 0.5s ease both', fontWeight: 300, fontFamily: 'var(--font-body)' },
+  heroTitle: { fontFamily: 'var(--font-display)', fontSize: 'clamp(44px,7vw,96px)', fontWeight: 300, lineHeight: 1.0, marginBottom: 28, animation: 'fadeUp 0.8s 0.35s ease both', color: 'var(--peach)' },
+  heroDesc: { color: 'var(--muted)', fontSize: 15, lineHeight: 1.75, maxWidth: 380, marginBottom: 40, animation: 'fadeUp 0.8s 0.5s ease both', fontWeight: 300, fontFamily: 'var(--font-body)' },
   heroStats: { display: 'flex', gap: 36, marginTop: 52, paddingTop: 36, borderTop: '1px solid var(--border)', animation: 'fadeUp 0.8s 0.8s ease both' },
   statNum: { fontFamily: 'var(--font-display)', fontSize: 38, fontWeight: 300, color: 'var(--peach)', lineHeight: 1 },
   statLabel: { fontSize: 10, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: 4, fontWeight: 500, fontFamily: 'var(--font-body)' },
@@ -622,8 +597,8 @@ const styles = {
   marqueeItem: { fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 300, letterSpacing: 4, color: 'var(--muted2)', whiteSpace: 'nowrap', padding: '0 36px', fontStyle: 'italic' },
   products: { background: 'var(--warm-white)', padding: '100px 52px' },
   eyebrow: { fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--peach)', marginBottom: 14, fontWeight: 600, fontFamily: 'var(--font-body)' },
-  sectionTitle: { fontFamily: 'var(--font-display)', fontSize: 'clamp(28px,6vw,64px)', fontWeight: 300, lineHeight: 1.05, marginBottom: 12, color: 'var(--peach)' },
-  sectionSub: { color: 'var(--muted)', fontSize: 'clamp(12px,3.2vw,14px)', lineHeight: 1.7, maxWidth: 480, marginBottom: 'clamp(32px,5vw,56px)', fontWeight: 300, fontFamily: 'var(--font-body)' },
+  sectionTitle: { fontFamily: 'var(--font-display)', fontSize: 'clamp(32px,5vw,64px)', fontWeight: 300, lineHeight: 1.05, marginBottom: 16, color: 'var(--peach)' },
+  sectionSub: { color: 'var(--muted)', fontSize: 14, lineHeight: 1.7, maxWidth: 480, marginBottom: 56, fontWeight: 300, fontFamily: 'var(--font-body)' },
   productsGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 },
   productCard: { background: 'white', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden', cursor: 'pointer', transition: 'transform 0.3s ease, box-shadow 0.3s ease', display: 'flex', flexDirection: 'column', animation: 'fadeIn 0.5s ease both' },
   cardImg: { height: 260, background: 'var(--peach-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' },
@@ -648,7 +623,7 @@ const styles = {
   footer: { background: 'var(--dark)', color: 'rgba(255,255,255,0.6)', padding: '48px 52px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: 'var(--font-body)' },
   footerLink: { fontSize: 11, color: 'rgba(255,255,255,0.45)', textDecoration: 'none', letterSpacing: '1.5px', textTransform: 'uppercase', fontWeight: 500 },
   modalOverlay: { position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(28,20,16,0.65)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 },
-  contactModal: { background: 'var(--cream)', border: '1px solid var(--border)', borderRadius: 12, padding: 'clamp(28px, 6vw, 48px) clamp(20px, 5vw, 40px)', maxWidth: 420, width: '95%', position: 'relative', textAlign: 'center', animation: 'modalIn 0.3s ease both' },
+  contactModal: { background: 'var(--cream)', border: '1px solid var(--border)', borderRadius: 12, padding: '48px 40px', maxWidth: 420, width: '90%', position: 'relative', textAlign: 'center', animation: 'modalIn 0.3s ease both' },
   modalClose: { position: 'absolute', top: 16, right: 20, background: 'none', border: 'none', fontSize: 22, color: 'var(--muted)', cursor: 'pointer' },
   waBtn: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, background: 'linear-gradient(135deg, #25D366, #128C7E)', color: 'white', padding: 16, borderRadius: '50px', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', boxShadow: '0 4px 15px rgba(37,211,102,0.35)' },
   igBtn: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, background: 'linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)', color: 'white', padding: 16, borderRadius: '50px', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', boxShadow: '0 4px 15px rgba(220,39,67,0.35)' },
