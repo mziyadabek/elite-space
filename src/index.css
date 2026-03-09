@@ -44,39 +44,68 @@ button { cursor: pointer; }
 
 /* ─── Mobile responsive ─── */
 @media (max-width: 768px) {
+
+  /* Hero */
   .hero-section {
     grid-template-columns: 1fr !important;
-    padding: 110px 20px 60px !important;
-    gap: 32px !important;
+    padding: 100px 20px 52px !important;
+    gap: 24px !important;
+    min-height: auto !important;
   }
   .hero-visual { display: none !important; }
-  .hero-stats { gap: 20px !important; flex-wrap: wrap !important; }
+  .hero-stats {
+    gap: 0 !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    padding-top: 24px !important;
+    margin-top: 32px !important;
+  }
+  .hero-stats > div {
+    flex: 1 !important;
+    text-align: center !important;
+    padding: 0 8px !important;
+    border-right: 1px solid var(--border);
+  }
+  .hero-stats > div:last-child { border-right: none !important; }
 
-  .benefits-section { padding: 60px 20px !important; }
-  .benefits-grid { grid-template-columns: repeat(2, 1fr) !important; }
-
-  .howto-section { padding: 60px 20px !important; }
-  .howto-grid { grid-template-columns: 1fr !important; }
-
-  .products-section { padding: 60px 0px 60px 20px !important; }
-  .products-section > div,
+  /* Products */
+  .products-section { padding: 52px 0 52px 20px !important; }
+  .products-section > div:not(:last-child),
   .products-section > p,
   .products-section > h2 { padding-right: 20px; }
 
+  /* Benefits */
+  .benefits-section { padding: 52px 20px !important; }
+  .benefits-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1px !important;
+    margin-top: 36px !important;
+  }
+  .benefit-item-inner { padding: 28px 20px !important; }
+
+  /* How to */
+  .howto-section { padding: 52px 20px !important; }
+  .howto-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-top: 36px !important;
+  }
+
+  /* Footer */
   .footer-bar {
     flex-direction: column !important;
-    gap: 20px !important;
+    gap: 24px !important;
     padding: 40px 20px !important;
     text-align: center !important;
   }
   .footer-links {
     justify-content: center !important;
     flex-wrap: wrap !important;
-    gap: 16px !important;
+    gap: 20px !important;
   }
 }
 
 @media (max-width: 480px) {
   .benefits-grid { grid-template-columns: 1fr !important; }
-  .hero-stats { gap: 14px !important; }
+  .hero-stats { gap: 0 !important; }
 }
