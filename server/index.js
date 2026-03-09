@@ -162,6 +162,13 @@ app.put('/api/settings', (req, res) => {
   res.json(db.settings)
 })
 
+// ── SERVE FRONTEND ──
+const DIST_DIR = path.join(__dirname, '../dist')
+if (fs.existsSync(DIST_DIR)) {
+  app.use(express.static(DIST_DIR))
+  app.get('*', (req, res) => res.sendFile(path.join(DIST_DIR, 'index.html')))
+}
+
 // ── START ──
 app.listen(PORT, () => {
   console.log(`\n🚀 élite space API running at http://localhost:${PORT}`)
